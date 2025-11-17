@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ATS Resume Matcher – Register</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <h1 class="logo">ATS Resume Matcher</h1>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="tool.html">Tool</a>
+        <a href="help.html">Help</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html" id="loginLink">Login</a>
+      </nav>
+    </div>
+  </header>
+  <main class="main container">
+    <h2>Create an Account</h2>
+    <form id="registerForm" class="auth-form">
+      <div class="form-group">
+        <label for="registerName">Name</label>
+        <input type="text" id="registerName" required />
+      </div>
+      <div class="form-group">
+        <label for="registerEmail">Email</label>
+        <input type="email" id="registerEmail" required />
+      </div>
+      <div class="form-group">
+        <label for="registerPassword">Password</label>
+        <input type="password" id="registerPassword" required />
+      </div>
+      <div class="form-group">
+        <label for="registerPassword2">Confirm Password</label>
+        <input type="password" id="registerPassword2" required />
+      </div>
+      <button type="submit" class="btn">Sign Up</button>
+      <p class="auth-switch">Already have an account? <a href="login.html">Login</a></p>
+      <p class="error-message" id="registerError" style="display:none; color:red;"></p>
+    </form>
+  </main>
+  <footer class="footer">
+    <div class="container footer-nav">
+      <a href="privacy.html">Privacy Policy</a> |
+      <a href="terms.html">Terms of Service</a>
+    </div>
+    <div class="container">
+      <p>&copy; <span id="year"></span> ATS Resume Matcher. All rights reserved.</p>
+    </div>
+  </footer>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const form = document.getElementById("registerForm");
+      form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        const name = document.getElementById("registerName").value.trim();
+        const email = document.getElementById("registerEmail").value.trim();
+        const password = document.getElementById("registerPassword").value.trim();
+        const confirm = document.getElementById("registerPassword2").value.trim();
+        const errorEl = document.getElementById("registerError");
+        errorEl.style.display = "none";
+        if (password !== confirm) {
+          errorEl.textContent = "Passwords do not match.";
+          errorEl.style.display = "block";
+          return;
+        }
+        signUp(email, password, name)
+          .then(() => {
+            // Redirect to tool after sign up
+            window.location.href = "tool.html";
+          })
+          .catch((err) => {
+            errorEl.textContent = err.message || "Failed to register.";
+            errorEl.style.display = "block";
+          });
+      });
+    });
+  </script>
+</body>
+</html>
