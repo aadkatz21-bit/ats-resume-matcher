@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ATS Resume Matcher – Tool</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <h1 class="logo">ATS Resume Matcher</h1>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="tool.html" class="active">Tool</a>
+        <a href="help.html">Help</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html" id="loginLink">Login</a>
+      </nav>
+    </div>
+  </header>
+  <main class="main container">
+    <h2>Resume vs Job Description Matcher</h2>
+    <p>Paste your resume and the job description below. Your data stays in your browser and is not uploaded.</p>
+    <form id="matcher-form">
+      <div class="form-group">
+        <label for="resumeInput">Your Resume</label>
+        <!-- Saved resumes dropdown (appears when logged in) -->
+        <div id="savedResumesSection" class="saved-resumes hidden">
+          <label for="savedResumesSelect" class="small-label">Saved Resumes</label>
+          <select id="savedResumesSelect"></select>
+          <button type="button" id="loadResumeBtn" class="btn btn-small">Load</button>
+          <button type="button" id="deleteResumeBtn" class="btn btn-small">Delete</button>
+        </div>
+        <textarea id="resumeInput" placeholder="Paste your resume here (text only)."></textarea>
+        <button type="button" id="saveResumeBtn" class="btn btn-small hidden">Save Current Resume</button>
+      </div>
+      <div class="form-group">
+        <label for="jobInput">Job Description</label>
+        <textarea id="jobInput" placeholder="Paste the job description here."></textarea>
+      </div>
+      <button type="button" id="compareBtn" class="btn">Compare</button>
+    </form>
+    <div id="results" class="hidden">
+      <h3>Results</h3>
+      <p id="matchScore"></p>
+      <h4>Missing Keywords:</h4>
+      <ul id="missingKeywords"></ul>
+    </div>
+    <section class="ads">
+      <!-- Ad placeholder: Replace with your AdSense code -->
+      <div class="ad-slot">
+        <p>Advertisement</p>
+      </div>
+    </section>
+    <section class="donation">
+      <h3>Support This Project</h3>
+      <p>If you find this tool useful, consider making a small donation to keep it free and support development.</p>
+      <!-- PayPal Donate Button -->
+      <form action="https://www.paypal.com/donate" method="post" target="_blank">
+        <!-- Replace business with your PayPal ID -->
+        <input type="hidden" name="business" value="placeholder@example.com" />
+        <input type="hidden" name="no_recurring" value="0" />
+        <input type="hidden" name="item_name" value="Support ATS Resume Matcher" />
+        <input type="hidden" name="currency_code" value="USD" />
+        <input type="hidden" name="amount" value="" />
+        <button type="submit" class="btn">Donate via PayPal</button>
+      </form>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container footer-nav">
+      <a href="privacy.html">Privacy Policy</a> |
+      <a href="terms.html">Terms of Service</a>
+    </div>
+    <div class="container">
+      <p>&copy; <span id="year"></span> ATS Resume Matcher. All rights reserved.</p>
+    </div>
+  </footer>
+  <script src="js/analysis.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
