@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ATS Resume Matcher – Login</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <h1 class="logo">ATS Resume Matcher</h1>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="tool.html">Tool</a>
+        <a href="help.html">Help</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html" class="active" id="loginLink">Login</a>
+      </nav>
+    </div>
+  </header>
+  <main class="main container">
+    <h2>Login</h2>
+    <form id="loginForm" class="auth-form">
+      <div class="form-group">
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" required />
+      </div>
+      <div class="form-group">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" required />
+      </div>
+      <button type="submit" class="btn">Login</button>
+      <p class="auth-switch">Don't have an account? <a href="register.html">Sign up</a></p>
+      <p class="error-message" id="loginError" style="display:none; color:red;"></p>
+    </form>
+  </main>
+  <footer class="footer">
+    <div class="container footer-nav">
+      <a href="privacy.html">Privacy Policy</a> |
+      <a href="terms.html">Terms of Service</a>
+    </div>
+    <div class="container">
+      <p>&copy; <span id="year"></span> ATS Resume Matcher. All rights reserved.</p>
+    </div>
+  </footer>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Handle login form submission
+    document.addEventListener("DOMContentLoaded", function() {
+      const form = document.getElementById("loginForm");
+      form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("loginPassword").value.trim();
+        const errorEl = document.getElementById("loginError");
+        errorEl.style.display = "none";
+        signIn(email, password)
+          .then(() => {
+            // Redirect to tool after successful login
+            window.location.href = "tool.html";
+          })
+          .catch((err) => {
+            errorEl.textContent = err.message || "Failed to log in.";
+            errorEl.style.display = "block";
+          });
+      });
+    });
+  </script>
+</body>
+</html>
