@@ -57,9 +57,11 @@ function initAnalytics() {
   script1.async = true;
   document.head.appendChild(script1);
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);} // eslint-disable-line
-  gtag('js', new Date());
-  gtag('config', measurementId);
+  window.gtag = function() {
+    window.dataLayer.push(arguments);
+  };
+  window.gtag('js', new Date());
+  window.gtag('config', measurementId);
 }
 
 /**
